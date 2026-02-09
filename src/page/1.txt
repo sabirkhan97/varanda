@@ -1,0 +1,424 @@
+import React, { useState } from 'react';
+import { ShoppingCart, Menu, X, Clock, Ban, Lock, Recycle, Search, Filter, ChevronRight, Heart, Star } from 'lucide-react';
+
+// shadcn/ui components would be imported from @/components/ui/*
+// For this standalone version, I'm including the necessary styles inline
+
+const VarandaStore = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [cartItems, setCartItems] = useState([]);
+
+  const products = [
+    {
+      id: 1,
+      name: 'Vintage Denim Jacket',
+      category: 'men',
+      price: 45,
+      condition: 'Excellent',
+      size: 'L',
+      image: '👕',
+      rating: 4.8,
+      sold: 12
+    },
+    {
+      id: 2,
+      name: 'Floral Summer Dress',
+      category: 'women',
+      price: 32,
+      condition: 'Like New',
+      size: 'M',
+      image: '👗',
+      rating: 4.9,
+      sold: 24
+    },
+    {
+      id: 3,
+      name: 'Leather Bomber Jacket',
+      category: 'men',
+      price: 68,
+      condition: 'Good',
+      size: 'XL',
+      image: '🧥',
+      rating: 4.7,
+      sold: 8
+    },
+    {
+      id: 4,
+      name: 'Classic Button-Up Shirt',
+      category: 'men',
+      price: 28,
+      condition: 'Excellent',
+      size: 'M',
+      image: '👔',
+      rating: 4.6,
+      sold: 18
+    },
+    {
+      id: 5,
+      name: 'Crop Top Set',
+      category: 'women',
+      price: 25,
+      condition: 'Like New',
+      size: 'S',
+      image: '👚',
+      rating: 4.8,
+      sold: 31
+    },
+    {
+      id: 6,
+      name: 'Knit Sweater',
+      category: 'women',
+      price: 38,
+      condition: 'Excellent',
+      size: 'L',
+      image: '🧵',
+      rating: 4.9,
+      sold: 15
+    },
+    {
+      id: 7,
+      name: 'Distressed Jeans',
+      category: 'men',
+      price: 42,
+      condition: 'Good',
+      size: 'L',
+      image: '👖',
+      rating: 4.5,
+      sold: 22
+    },
+    {
+      id: 8,
+      name: 'Athletic Tank Top',
+      category: 'women',
+      price: 18,
+      condition: 'Like New',
+      size: 'S',
+      image: '🎽',
+      rating: 4.7,
+      sold: 27
+    }
+  ];
+
+  const categories = [
+    { id: 'all', label: 'All Items', count: products.length },
+    { id: 'men', label: "Men's", count: products.filter(p => p.category === 'men').length },
+    { id: 'women', label: "Women's", count: products.filter(p => p.category === 'women').length },
+    { id: 'new', label: 'New Arrivals', count: 12 }
+  ];
+
+  const addToCart = (product:any) => {
+    setCartItems([...cartItems, product]);
+  };
+
+  const filteredProducts = selectedCategory === 'all' 
+    ? products 
+    : products.filter(p => p.category === selectedCategory);
+
+  return (
+    <div className="min-h-screen bg-black text-white">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-black border-b-2 border-white">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center space-x-4">
+              <div>
+                <h1 className="text-3xl md:text-4xl font-black tracking-wider">VARANDA</h1>
+                <p className="text-xs text-gray-400 tracking-wide">THRIFT BASED STORE • OPEN 24/7</p>
+              </div>
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <a href="#new" className="text-sm font-semibold tracking-wider hover:text-gray-400 transition-colors">
+                NEW ARRIVALS
+              </a>
+              <a href="#men" className="text-sm font-semibold tracking-wider hover:text-gray-400 transition-colors">
+                MEN
+              </a>
+              <a href="#women" className="text-sm font-semibold tracking-wider hover:text-gray-400 transition-colors">
+                WOMEN
+              </a>
+              <button className="relative p-2 hover:bg-white hover:text-black transition-all rounded-md">
+                <ShoppingCart className="w-5 h-5" />
+                {cartItems.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-white text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItems.length}
+                  </span>
+                )}
+              </button>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden p-2 hover:bg-white hover:text-black transition-all rounded-md"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-gray-800 bg-black">
+            <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+              <a href="#new" className="text-sm font-semibold tracking-wider hover:text-gray-400 transition-colors py-2">
+                NEW ARRIVALS
+              </a>
+              <a href="#men" className="text-sm font-semibold tracking-wider hover:text-gray-400 transition-colors py-2">
+                MEN
+              </a>
+              <a href="#women" className="text-sm font-semibold tracking-wider hover:text-gray-400 transition-colors py-2">
+                WOMEN
+              </a>
+              <button className="flex items-center justify-between text-sm font-semibold tracking-wider hover:text-gray-400 transition-colors py-2">
+                <span>CART</span>
+                <span className="bg-white text-black px-3 py-1 rounded-full text-xs">
+                  {cartItems.length}
+                </span>
+              </button>
+            </nav>
+          </div>
+        )}
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-b from-black via-gray-900 to-black border-b-2 border-white">
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="text-5xl md:text-7xl font-black tracking-wider mb-6">
+              CURATED THRIFT
+            </h2>
+            <p className="text-lg md:text-xl text-gray-300 mb-12 tracking-wide">
+              Unique Pieces • Unbeatable Prices • Available 24/7
+            </p>
+
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto mb-12">
+              <div className="flex items-center bg-white rounded-full overflow-hidden">
+                <Search className="w-5 h-5 text-black ml-6" />
+                <input 
+                  type="text" 
+                  placeholder="Search for clothing..."
+                  className="flex-1 px-4 py-4 text-black outline-none"
+                />
+                <button className="bg-black text-white px-8 py-4 font-bold tracking-wider hover:bg-gray-800 transition-colors">
+                  SEARCH
+                </button>
+              </div>
+            </div>
+
+            {/* Policy Badges */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="bg-black border-2 border-white p-6 rounded-lg hover:bg-white hover:text-black transition-all group">
+                <Clock className="w-8 h-8 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                <p className="text-sm font-bold tracking-wider">OPEN 24/7</p>
+              </div>
+              <div className="bg-black border-2 border-white p-6 rounded-lg hover:bg-white hover:text-black transition-all group">
+                <Ban className="w-8 h-8 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                <p className="text-sm font-bold tracking-wider">NO RETURNS</p>
+              </div>
+              <div className="bg-black border-2 border-white p-6 rounded-lg hover:bg-white hover:text-black transition-all group">
+                <Lock className="w-8 h-8 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                <p className="text-sm font-bold tracking-wider">NO EXCHANGE</p>
+              </div>
+              <div className="bg-black border-2 border-white p-6 rounded-lg hover:bg-white hover:text-black transition-all group">
+                <Recycle className="w-8 h-8 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                <p className="text-sm font-bold tracking-wider">THRIFT ONLY</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Category Filter */}
+      <section className="bg-gray-900 border-b-2 border-gray-800 sticky top-[73px] z-40">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between overflow-x-auto">
+            <div className="flex items-center space-x-2 md:space-x-4">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-4 md:px-6 py-2 rounded-full font-semibold text-sm tracking-wider whitespace-nowrap transition-all ${
+                    selectedCategory === cat.id
+                      ? 'bg-white text-black'
+                      : 'bg-black text-white border border-white hover:bg-white hover:text-black'
+                  }`}
+                >
+                  {cat.label} ({cat.count})
+                </button>
+              ))}
+            </div>
+            <button className="hidden md:flex items-center space-x-2 px-4 py-2 border border-white rounded-full hover:bg-white hover:text-black transition-all">
+              <Filter className="w-4 h-4" />
+              <span className="font-semibold text-sm tracking-wider">FILTER</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Grid */}
+      <section className="container mx-auto px-4 py-12 md:py-20">
+        <div className="flex items-center justify-between mb-8">
+          <h3 className="text-2xl md:text-3xl font-black tracking-wider">
+            {selectedCategory === 'all' ? 'ALL ITEMS' : selectedCategory.toUpperCase()}
+          </h3>
+          <p className="text-gray-400 text-sm md:text-base">
+            {filteredProducts.length} items found
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredProducts.map((product) => (
+            <div 
+              key={product.id}
+              className="group bg-gray-900 border-2 border-gray-800 rounded-lg overflow-hidden hover:border-white transition-all hover:shadow-2xl hover:shadow-white/20 hover:scale-105"
+            >
+              {/* Product Image */}
+              <div className="relative aspect-square bg-gray-800 flex items-center justify-center text-8xl border-b-2 border-gray-800">
+                {product.image}
+                <button className="absolute top-4 right-4 p-2 bg-black rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white hover:text-black">
+                  <Heart className="w-5 h-5" />
+                </button>
+                <div className="absolute top-4 left-4 bg-white text-black px-3 py-1 rounded-full text-xs font-bold tracking-wider">
+                  {product.condition}
+                </div>
+              </div>
+
+              {/* Product Info */}
+              <div className="p-5">
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">
+                      {product.category === 'men' ? "Men's Wear" : "Women's Wear"}
+                    </p>
+                    <h4 className="text-lg font-bold mb-2 group-hover:text-gray-300 transition-colors">
+                      {product.name}
+                    </h4>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-1 mb-3">
+                  <Star className="w-4 h-4 fill-white" />
+                  <span className="text-sm font-semibold">{product.rating}</span>
+                  <span className="text-xs text-gray-400">({product.sold} sold)</span>
+                </div>
+
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs text-gray-400">Size: {product.size}</span>
+                  <span className="text-2xl font-black">${product.price}</span>
+                </div>
+
+                <button 
+                  onClick={() => addToCart(product)}
+                  className="w-full bg-white text-black py-3 rounded-full font-bold text-sm tracking-wider hover:bg-black hover:text-white border-2 border-white transition-all flex items-center justify-center space-x-2"
+                >
+                  <ShoppingCart className="w-4 h-4" />
+                  <span>ADD TO CART</span>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Load More */}
+        <div className="text-center mt-12">
+          <button className="px-8 py-4 bg-white text-black rounded-full font-bold tracking-wider hover:bg-black hover:text-white border-2 border-white transition-all inline-flex items-center space-x-2">
+            <span>LOAD MORE</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black border-t-2 border-white mt-20">
+        <div className="container mx-auto px-4 py-12 md:py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {/* About */}
+            <div>
+              <h3 className="text-2xl font-black tracking-wider mb-4">VARANDA</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Your trusted thrift-based clothing store. Curated selections available 24/7. 
+                Find unique pieces at unbeatable prices.
+              </p>
+            </div>
+
+            {/* Policies */}
+            <div>
+              <h4 className="text-lg font-bold tracking-wider mb-4">POLICIES</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>• No Returns</li>
+                <li>• No Exchanges</li>
+                <li>• All Sales Final</li>
+                <li>• Open 24/7</li>
+                <li>• Secure Checkout</li>
+              </ul>
+            </div>
+
+            {/* Shop */}
+            <div>
+              <h4 className="text-lg font-bold tracking-wider mb-4">SHOP</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="#new" className="text-gray-400 hover:text-white transition-colors">
+                    New Arrivals
+                  </a>
+                </li>
+                <li>
+                  <a href="#men" className="text-gray-400 hover:text-white transition-colors">
+                    Men's Collection
+                  </a>
+                </li>
+                <li>
+                  <a href="#women" className="text-gray-400 hover:text-white transition-colors">
+                    Women's Collection
+                  </a>
+                </li>
+                <li>
+                  <a href="#accessories" className="text-gray-400 hover:text-white transition-colors">
+                    Accessories
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="text-lg font-bold tracking-wider mb-4">CONTACT</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>hello@varanda.com</li>
+                <li>(555) 123-4567</li>
+                <li>Live Chat 24/7</li>
+                <li className="pt-4">
+                  <div className="flex space-x-4">
+                    <a href="#" className="w-10 h-10 border-2 border-white rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                      f
+                    </a>
+                    <a href="#" className="w-10 h-10 border-2 border-white rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                      𝕏
+                    </a>
+                    <a href="#" className="w-10 h-10 border-2 border-white rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                      in
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-gray-800 pt-8 text-center">
+            <p className="text-sm text-gray-400">
+              © 2026 VARANDA. All rights reserved. Thrift-based clothing store.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default VarandaStore;
