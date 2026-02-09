@@ -548,44 +548,7 @@ const products = [
               </div>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 hover:border-purple-500/50 transition-all group">
-                <div className="flex items-center justify-between mb-2">
-                  <Clock className="w-5 h-5 text-purple-400" />
-                  <TrendingUp className="w-5 h-5 text-green-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-                <p className="text-2xl font-bold">24/7</p>
-                <p className="text-xs text-gray-400">Live Drops</p>
-              </div>
-              
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 hover:border-pink-500/50 transition-all group">
-                <div className="flex items-center justify-between mb-2">
-                  <Truck className="w-5 h-5 text-pink-400" />
-                  <Zap className="w-5 h-5 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-                <p className="text-2xl font-bold">2-Day</p>
-                <p className="text-xs text-gray-400">Shipping</p>
-              </div>
-              
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 hover:border-cyan-500/50 transition-all group">
-                <div className="flex items-center justify-between mb-2">
-                  <Shield className="w-5 h-5 text-cyan-400" />
-                  <Sparkles className="w-5 h-5 text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-                <p className="text-2xl font-bold">Auth</p>
-                <p className="text-xs text-gray-400">Verified</p>
-              </div>
-              
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 hover:border-yellow-500/50 transition-all group">
-                <div className="flex items-center justify-between mb-2">
-                  <Star className="w-5 h-5 text-yellow-400" />
-                  <Heart className="w-5 h-5 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-                <p className="text-2xl font-bold">4.9</p>
-                <p className="text-xs text-gray-400">Rating</p>
-              </div>
-            </div>
+         
           </div>
         </div>
       </section>
@@ -734,6 +697,46 @@ const products = [
         </div>
       </section>
 
+
+         {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 hover:border-purple-500/50 transition-all group">
+                <div className="flex items-center justify-between mb-2">
+                  <Clock className="w-5 h-5 text-purple-400" />
+                  <TrendingUp className="w-5 h-5 text-green-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <p className="text-2xl font-bold">24/7</p>
+                <p className="text-xs text-gray-400">Live Drops</p>
+              </div>
+              
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 hover:border-pink-500/50 transition-all group">
+                <div className="flex items-center justify-between mb-2">
+                  <Truck className="w-5 h-5 text-pink-400" />
+                  <Zap className="w-5 h-5 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <p className="text-2xl font-bold">2-Day</p>
+                <p className="text-xs text-gray-400">Shipping</p>
+              </div>
+              
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 hover:border-cyan-500/50 transition-all group">
+                <div className="flex items-center justify-between mb-2">
+                  <Shield className="w-5 h-5 text-cyan-400" />
+                  <Sparkles className="w-5 h-5 text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <p className="text-2xl font-bold">Auth</p>
+                <p className="text-xs text-gray-400">Verified</p>
+              </div>
+              
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 hover:border-yellow-500/50 transition-all group">
+                <div className="flex items-center justify-between mb-2">
+                  <Star className="w-5 h-5 text-yellow-400" />
+                  <Heart className="w-5 h-5 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <p className="text-2xl font-bold">4.9</p>
+                <p className="text-xs text-gray-400">Rating</p>
+              </div>
+            </div>
+
       {/* Newsletter */}
       <section className="container mx-auto px-4 py-20">
         <div className="max-w-2xl mx-auto text-center">
@@ -806,6 +809,8 @@ const products = [
                 ))}
               </ul>
             </div>
+
+
 
             {/* Social */}
             <div>
